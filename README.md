@@ -1,5 +1,5 @@
 # codenames
-This game is often a four player where the players are split into two teams. These teams compete to guess their words first.
+This game is often a four player game where the players are split into two teams. These teams compete to guess their words first.
 
 ### Setup
 - A 4x5 "board" of cards is laid down for all players to see.
