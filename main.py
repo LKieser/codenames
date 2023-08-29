@@ -1,8 +1,5 @@
-"""-Import the system to allow the terminal to be cleared using system("clear").
--Import The Board to get the class that prints the board in terminal.
--Import Codegivers and Decoders to get classess for the two different types of players.
--Import win_condition function to be exectued
-and end the game when the win conditions have been met."""
+"""Main module contains only the main() function 
+which combines all of the other modules to create the game play."""
 from os import system
 from Board import Board
 from Team import Codegivers, Decoders
