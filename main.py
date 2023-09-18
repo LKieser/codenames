@@ -1,28 +1,27 @@
 """Main module contains only the main() function 
 which combines all of the other modules to create the game play."""
 from os import system
-from Board import Board
-from Team import Codegivers, Decoders
+from board import Board
+from Team import Codegiver, Decoder
 from win import win_condition
 
 
 def main():
     """main function contains entire game play"""
-    # This section creates the board and the blue and red team codegivers.
+    # This section creates the board and the blue and red team codegiver.
     board = Board()
-    red_codegiver = Codegivers("red")
-    blue_codegiver = Codegivers("blue")
-    flag = True
+    red_codegiver = Codegiver("red")
+    blue_codegiver = Codegiver("blue")
 
-    print(board.create_each_deck())
+    print(board.output(2))
     input('\nPress "Enter" when you are ready to begin the game: ')
     while True:
         # this section clears the terminal and then ask the codegiver to give their word
         system("clear")
-        input("\nIt is now the Codegivers turn.\nWARNING: all word guessers must look away from the screen!\n\nPress \"Enter\" when you are ready: ")
+        input("\nIt is now the Codegiver turn.\nWARNING: all word guessers must look away from the screen!\n\nPress \"Enter\" when you are ready: ")
         system("clear")
-        board.answers_board()
-        if board.first_player == "red":
+        print(board.output(1))
+        if board.up_next == "red":
             red_codegiver.create_code_word()
         else:
             blue_codegiver.create_code_word()
@@ -31,70 +30,32 @@ def main():
         input('\nPress "Enter" to continue to the guesser\'s turn: ')
         system("clear")
         # Ask for a guess from the red decoders
-        if board.first_player == "red":
+        if board.up_next == "red":
             # creates the decoder object again to update it
-            red_decoder = Decoders(red_codegiver, "red", board)
-            board.all_board()
+            red_decoder = Decoder(red_codegiver, board, "red")
+            print(board.output(2))
             red_decoder.take_guess()
             system("clear")
             # check for win
-            if not win_condition("red", red_decoder, board, flag):
-                board.all_board()
-                break
-            board.all_board()
+            win_condition(red_decoder, board)
+            print(board.output(2))
             input('\nThis is the current board. Press "Enter" to continue the game.')
         # ask for a guess from the blue decoders
         else:
             # creates the decoder object again to update it
-            blue_decoder = Decoders(blue_codegiver, "blue", board)
-            board.all_board()
+            blue_decoder = Decoder(blue_codegiver, board,"blue")
+            print(board.output(2))
             blue_decoder.take_guess()
             system("clear")
             # check for win
-            if not win_condition("blue", blue_decoder, board, flag):
-                board.all_board()
-                break
-            board.all_board()
+            win_condition(blue_decoder, board)
+            print(board.output(2))
             input('\nThis is the current board. Press "Enter" to continue the game.')
 
-        # this section ask the other codegiver to give their word
-        system("clear")
-        input("\nIt is now the Codegivers turn.\nWARNING: all word guessers must look away from the screen!\n\nPress \"Enter\" when you are ready: ")
-        system("clear")
-        board.answers_board()
-        # this one is for the second turn so it is backwards from the first one
-        if board.first_player == "blue":
-            red_codegiver.create_code_word()
+        if board.up_next == "red":
+            board.up_next = "blue"
         else:
-            blue_codegiver.create_code_word()
-
-        system("clear")
-        input('\nPress "Enter" to continue to the guesser\'s turn: ')
-        system("clear")
-        # Ask for a guess from the red decoders
-        if board.first_player == "blue":
-            # creates the decoder object again to update it
-            red_decoder = Decoders(red_codegiver, "red", board)
-            board.all_board()
-            red_decoder.take_guess()
-            system("clear")
-            if not win_condition("blue", blue_decoder, board, flag):
-                board.all_board()
-                break
-            board.all_board()
-            input('\nThis is the current board. Press "Enter" to continue the game.')
-        # ask for a guess from the blue decoders
-        else:
-            # creates the decoder object again to update it
-            blue_decoder = Decoders(blue_codegiver, "blue", board)
-            board.all_board()
-            blue_decoder.take_guess()
-            system("clear")
-            if not win_condition("red", red_decoder, board, flag):
-                board.all_board()
-                break
-            board.all_board()
-            input('\nThis is the current board. Press "Enter" to continue the game.')
+            board.up_next = "red"
 
 
 if __name__ == "__main__":
