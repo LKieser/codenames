@@ -21,36 +21,22 @@ def main():
         input("\nIt is now the Codegiver turn.\nWARNING: all word guessers must look away from the screen!\n\nPress \"Enter\" when you are ready: ")
         system("clear")
         print(board.output(1))
-        if board.up_next == "red":
-            red_codegiver.create_code_word()
-        else:
-            blue_codegiver.create_code_word()
+
+        codegiver = red_codegiver if board.up_next == "red" else blue_codegiver
+        codegiver.create_code_word()
 
         system("clear")
         input('\nPress "Enter" to continue to the guesser\'s turn: ')
         system("clear")
-        # Ask for a guess from the red decoders
-        if board.up_next == "red":
-            # creates the decoder object again to update it
-            red_decoder = Decoder(red_codegiver, board, "red")
-            print(board.output(2))
-            red_decoder.take_guess()
-            system("clear")
-            # check for win
-            win_condition(red_decoder, board)
-            print(board.output(2))
-            input('\nThis is the current board. Press "Enter" to continue the game.')
-        # ask for a guess from the blue decoders
-        else:
-            # creates the decoder object again to update it
-            blue_decoder = Decoder(blue_codegiver, board,"blue")
-            print(board.output(2))
-            blue_decoder.take_guess()
-            system("clear")
-            # check for win
-            win_condition(blue_decoder, board)
-            print(board.output(2))
-            input('\nThis is the current board. Press "Enter" to continue the game.')
+        # Ask for a guess from the decoder
+        decoder = Decoder(codegiver, board, "red")
+        print(board.output(2))
+        decoder.take_guess()
+        system("clear")
+        # check for win
+        win_condition(decoder, board)
+        print(board.output(2))
+        input('\nThis is the current board. Press "Enter" to continue the game.')
 
         if board.up_next == "red":
             board.up_next = "blue"
