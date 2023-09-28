@@ -3,6 +3,8 @@ The Board class creates the deck and uses the Card class to print
 out two boards: The answer board and the common board.'''
 import random
 from termcolor import colored
+from os import system
+
 
 class Card:
     '''Card is used by the board to store the word, color, and if it has been flipped of each of the individual 25 words'''
@@ -59,6 +61,21 @@ class Board:
                 str += self.row_string(row)
                 row.clear()
         return str
-
-    def __str__(self):
-        return "temporary"
+    
+    def render(self, Bool, skip, guess_value, board, game_over):
+        # decoder
+        if (Bool or skip) and not game_over:
+            print(board.output(2))
+            if guess_value == 1:
+                print("\nCorrect!\tPress \"Enter\" to continue: ")
+            if guess_value == 2:
+                print("\nThat is the other team's word! Your turn is over.\tPress \"Enter\" to continue: ")
+            if guess_value == 3:
+                print("\nThat is a nuetral word. Your turn is over.\tPress \"Enter\" to continue: ")
+        # codegiver
+        else:
+            if not game_over:
+                system("clear")
+                input("\nIt is now the Codegiver turn.\nWARNING: all word guessers must look away from the screen!\n\nPress \"Enter\" when you are ready: ")
+                system("clear")
+            print(board.output(1))
