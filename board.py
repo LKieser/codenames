@@ -1,10 +1,7 @@
 '''Card class contains the attributes for each individual card. 
-The Board class creates the deck and uses the Card class to print 
-out two boards: The answer board and the common board.'''
+The Board class creates the deck and uses the Card class to print the board.'''
 import random
 from termcolor import colored
-from os import system
-
 
 class Card:
     '''Card is used by the board to store the word, color, and if it has been flipped of each of the individual 25 words'''
@@ -14,9 +11,10 @@ class Card:
         self.flipped = False
 
 class Board:
-    '''creates the deck of cards in the __init__ function and 
-    then prints the board though the output function'''
-    def __init__(self):
+    '''creates the deck of cards in the __init__ function. Output prints the board.
+    Render is the function that is included in the main game loop.'''
+    def __init__(self, up_first):
+        self.up_first = up_first
         cards = []
         with open("code_names.txt", "r") as f:
             lines = f.readlines()
@@ -31,8 +29,7 @@ class Board:
             cards.append(Card(lines.pop().replace("\n", ""), "yellow"))
 
         cards.append(Card(lines.pop().replace("\n", ""), "black"))
-        self.up_next = random.choice(["red", "blue"])
-        cards.append(Card(lines.pop().replace("\n", ""), self.up_next))
+        cards.append(Card(lines.pop().replace("\n", ""), self.up_first))
 
         random.shuffle(cards)
         self.cards = cards
@@ -49,33 +46,16 @@ class Board:
 '''
         return x
 
-    def output(self, n):
+    def render(self, show_all_people):
         '''This function is needed to have two boards to print. A board for the codegiver and a board for the decoder'''
-        # n = 1 for answer board and 2 for everyone's board
+        # show_all_people is True for the answer board and false for everyone's board
         str = ""
         row = []
         for i, card in zip(range(len(self.cards)), self.cards):
             # colors the card if it is the answer board or if it is a flipped card. It highlights it if it is in the answer board and flipped
-            row.append(colored(card.word, card.color if n == 1 else card.color if n == 2 and card.flipped else 'light_grey', 'on_black', ["reverse"] if card.flipped and n == 1 else ["bold"]))
+            row.append(colored(card.word, card.color if not show_all_people else card.color if show_all_people and card.flipped else 'light_grey', 'on_black', ["reverse"] if card.flipped and not show_all_people else ["bold"]))
             if ((i+1) % 5) == 0:
                 str += self.row_string(row)
                 row.clear()
-        return str
+        return print(str)
     
-    def render(self, Bool, skip, guess_value, board, game_over):
-        # decoder
-        if (Bool or skip) and not game_over:
-            print(board.output(2))
-            if guess_value == 1:
-                print("\nCorrect!\tPress \"Enter\" to continue: ")
-            if guess_value == 2:
-                print("\nThat is the other team's word! Your turn is over.\tPress \"Enter\" to continue: ")
-            if guess_value == 3:
-                print("\nThat is a nuetral word. Your turn is over.\tPress \"Enter\" to continue: ")
-        # codegiver
-        else:
-            if not game_over:
-                system("clear")
-                input("\nIt is now the Codegiver turn.\nWARNING: all word guessers must look away from the screen!\n\nPress \"Enter\" when you are ready: ")
-                system("clear")
-            print(board.output(1))
