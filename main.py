@@ -17,15 +17,22 @@ def main():
         game.render()
 
         # Process input.
-        if game.guessing:
-            game.take_guess()
-        else:
-            game.create_code_word()
+        if game.skip:
+            input()
 
-        # Update state
-        if game.guessing and not game.skip:
-            game.check_guess()
-            game.check_win()
+        if game.game_over:
+            break
+        
+        if not game.skip:
+            if game.guessing:
+                game.take_guess()
+            else:
+                game.create_code_word()
+
+            # Update state
+            if game.guessing:
+                game.check_guess()
+                game.check_win()
         game.update_state()
 
 if __name__ == "__main__":

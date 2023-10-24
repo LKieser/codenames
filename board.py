@@ -11,8 +11,8 @@ class Card:
         self.flipped = False
 
 class Board:
-    '''creates the deck of cards in the __init__ function. Output prints the board.
-    Render is the function that is included in the main game loop.'''
+    '''Creates the deck of cards in the __init__ function. 
+    Render prints the board and is the function that is included in the main game loop.'''
     def __init__(self, up_first):
         self.up_first = up_first
         cards = []
@@ -46,14 +46,23 @@ class Board:
 '''
         return x
 
-    def render(self, show_all_people):
+    def render(self, show_answers):
         '''This function is needed to have two boards to print. A board for the codegiver and a board for the decoder'''
-        # show_all_people is True for the answer board and false for everyone's board
+        # show_answers is True for the answer board and false for everyone's board
         str = ""
         row = []
         for i, card in zip(range(len(self.cards)), self.cards):
-            # colors the card if it is the answer board or if it is a flipped card. It highlights it if it is in the answer board and flipped
-            row.append(colored(card.word, card.color if not show_all_people else card.color if show_all_people and card.flipped else 'light_grey', 'on_black', ["reverse"] if card.flipped and not show_all_people else ["bold"]))
+            # colors the card if it is the answer board or if it is a flipped card.
+            if show_answers or (not show_answers and card.flipped):
+                #  It highlights it if it is in the answer board and flipped
+                if show_answers and card.flipped:
+                    row.append(colored(card.word, card.color, 'on_black', ['reverse']))
+                # It makes all of the other cards bold
+                else:
+                    row.append(colored(card.word, card.color, 'on_black', ['bold']))
+            else:
+                row.append(colored(card.word, 'light_grey', 'on_black', ['bold']))
+
             if ((i+1) % 5) == 0:
                 str += self.row_string(row)
                 row.clear()
