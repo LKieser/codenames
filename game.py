@@ -1,7 +1,8 @@
 '''Game module contains all of the functions used in the main game loop'''
 from os import system
-from board import Board
 import random
+from board import Board
+
 
 class Game:
     '''Initialize the game. This will only run once.
@@ -11,9 +12,8 @@ class Game:
         self.board = Board(up_first=self.team)
         self.code_word = ''
         self.code_number = 0
-        # skip is needed to override the stateful loop based on whether guessing is True or False.
-        # This allows render() to print out the non-answer board one more time before the answer board is printed for the Codegiver.
-        self.skip = False 
+        # Skip allows render() to print out the non-answer board one more time after the last guess before the answer board is printed for the Codegiver.
+        self.skip = False
         self.game_over = False
         self.guess = ''
         self.guess_value = 0
@@ -30,6 +30,7 @@ class Game:
             system("clear")
             input("\nIt is now the Codegiver's turn.\nWARNING: all word guessers must look away from the screen!\n\nPress \"Enter\" when you are ready: ")
             system("clear")
+        
 
         # print board
         self.board.render(show_answers = not guessing)
@@ -54,6 +55,10 @@ class Game:
                     print(f"{self.winner_color} team correctly guessed all of their cards.")
                     print(f"{self.winner_color} wins! Congratulations!")
 
+            # input() is needed to pause the game before continuing to the next turn.
+            if self.guess_value >= 1 or self.skip:
+                input()
+
 
     def create_code_word(self):
         '''Used in the game loop to ask the codegiver for their codeword and the number of cards it applies to.'''
@@ -73,9 +78,6 @@ class Game:
 
     def take_guess(self):
         '''The decoder takes their guess in this function'''
-        # input() is used to pause the game before it continues to the next segment here. The prompt is in board.render
-        if self.guess_value > 0:
-            input()
         print(f"\t\t\t\t\t\t\t\tTeam {self.team}.")
         print(f"\t\t\t\t\t\t\tThe code word is --{self.code_word.capitalize()}--\n\t\t\t\t\t\t\t\tfor --{self.code_number}--\n")
 

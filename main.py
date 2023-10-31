@@ -17,9 +17,6 @@ def main():
         game.render()
 
         # Process input.
-        if game.skip:
-            input()
-
         if game.game_over:
             break
         
