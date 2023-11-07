@@ -118,7 +118,7 @@ class Game:
         '''Function ends the game on a few conditions:
         1) If Blue or Red pick the death card the game will end.
         2) If either team gets their entire word set the game will end.'''
-        color = ["blue","red"]
+        color = ["red","blue"]
 
         if self.guess_value == 4:
             self.winner_color = 'red' if self.team == 'blue' else 'blue'
@@ -135,7 +135,7 @@ class Game:
 
     def update_state(self):
         '''Check if guessing is still true.
-        When guessing is no longer true, end game if game is over or update the team color.'''
+        When guessing is no longer true, use skip for a turn then update the team color.'''
         self.guessing = (self.guess_value <= 1 and self.code_number > 0) and not self.game_over
         if not self.guessing:
             self.skip = False if self.skip else True
