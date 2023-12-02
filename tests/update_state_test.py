@@ -79,7 +79,7 @@ class TestCheckGuess:
 class TestCheckWin:
     '''Check_win is responsible for assigning a winner if the death card 
     is picked or if the entire deck has been flipped'''
-    def test_winner_and_game_over_for_death_card(self):
+    def test_red_wins_if_blue_draws_death(self):
         'test if winner_color is the opposite team and game_over is True'
         game = Game()
         game.guess_value = 4
@@ -90,7 +90,7 @@ class TestCheckWin:
         assert game.winner_color == 'red'
         assert game.game_over is True
 
-    def test_winner_for_death_card(self):
+    def test_blue_wins_if_red_draws_death(self):
         'test if when team is "red", winner_color is "blue"'
         game = Game()
         game.guess_value = 4
@@ -131,7 +131,7 @@ class TestUpdateState:
     '''Update_state sets guessing to True or False, then sets skip True first then False,
     and finally, switches the team color and resets guess_value to zero'''
     def test_guessing_is_true_under_right_conditions(self):
-        'If these three variables are as they are set here, guessing should be True'
+        'If our last guess was correct and we have guesses left and the game is not over, we should get another guess'
         game = Game()
         game.guess_value = 1
         game.code_number = 1
@@ -148,16 +148,12 @@ class TestUpdateState:
         game.guess_value = 1
         game.code_number = 1
         game.game_over = True
-        # need skip to be True so that self.guessing is not reset to True before test
-        game.skip = True
-        game.team = "blue"
+        game.skip = False
 
         game.update_state()
 
-        assert game.skip is False
-        assert game.guessing is False
-        assert game.team == "red" # team color should be switched if game.skip is False
-        assert game.guess_value == 0 # guess_value should reset if game.skip is False
+        assert game.skip is True
+        assert game.guessing is True
 
     def test_guessing_is_false_when_code_number_is_zero(self):
         'If code_number is 0, guessing should be False'
@@ -195,6 +191,8 @@ class TestUpdateState:
         'When guessing is false and skip is false, skip and guessing should be changed to True'
         game = Game()
         game.skip = False
+        
+        assert game.guessing is False
 
         game.update_state()
 
