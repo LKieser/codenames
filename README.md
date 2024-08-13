@@ -1,14 +1,14 @@
 # codenames
-Codenames is a board/card game where two teams compete against each to be the first to guess all of their team's cards. This project uses a TUI to implement the setup of the board and the game play
+Codenames is a board/card game where two teams, red and blue, compete against each to be the first to guess all of their team's cards. This project uses a TUI to implement the setup of the board and the game play
 
-<img src="doc/codenames.png"/>
+<img src="doc/codenames.gif" width="65%"/>
 
 # Learning Objectives
 - Familiarity with Python
 - Learning to use Object Oriented Programming with Python
 - Structuring a game loop
 - Implementing pytest
-- Understanding the process of refactoring code to make it the cleanest possible
+- Understanding the process of refactoring code to make it more readable and easy to debug
 
 # Building, Running, and Testing
 1. Clone this repo
