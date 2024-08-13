@@ -32,10 +32,10 @@ Codenames is a board/card game where two teams compete against each to be the fi
 
 # Design Documentation
 ### Control flow
-![Alt Text](doc/controlFlow.png?raw=true)
+<img src="doc/controlFlow.png" width="45%">
 
 ### Class structure
-<img src="doc/classDiagram.png"/>
+<img src="doc/classDiagram.png" width="25%">
 
 ### Board state
-<img src="doc/boardState.png"/>
+<img src="doc/boardState.png" width="35%">
