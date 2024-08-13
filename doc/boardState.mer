@@ -1,0 +1,10 @@
+---
+title: "Board states based on the player"
+---
+
+stateDiagram-v2
+    [*] --> Player?: Render()
+    Player? --> AnswerBoard: CodeGiver()
+    Player? --> PlainBoard: Guesser()
+    AnswerBoard --> UpdateBoard: UpdateState()
+    PlainBoard --> UpdateBoard: UpdateState()

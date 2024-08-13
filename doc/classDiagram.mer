@@ -1,0 +1,41 @@
+---
+title: "Class relationships and selected members"
+---
+classDiagram
+
+class Game {
+    render(guessing = None)
+    create_code_word()
+    take_guess()
+    check_guess()
+    check_win()
+    update_state()
+
+    team
+    board
+    code_word
+    code_number
+    skip
+    game_over
+    guess
+    guess_value
+    guessing
+    winner_color
+}
+
+class Card {
+    word
+    color
+    flipped
+}
+
+class Board {
+    row_string()
+    render()
+
+    up_first
+    cards[]
+}
+
+Board *-- Card: Composition
+Game o-- Board: Aggregation

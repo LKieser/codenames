@@ -1,0 +1,28 @@
+flowchart LR
+    subgraph main
+        direction TB
+        Start --> Show
+        Show[Show Board] --> Loop[Game Loop]
+        Loop --> End
+    end
+
+    subgraph GameLoop
+        direction TB
+        Board[Show Board] 
+        Board --> Over{Game Over?}
+        Over -->|Yes| RunEnd[End]
+        Over -->|No| Skip{Skip?}
+        Skip -->|Yes| updateState[Update State]
+        Skip -->|No| Turn{Guesser's Turn?}
+        Turn -->|No| Codegiver[Codegiver Create Codeword]
+        Codegiver --> updateState
+        Turn -->|Yes| Guesser[Make Guess]
+        Guesser --> guessCheck[Check Guess]
+        guessCheck --> winCheck[Check Win Condition]
+        winCheck --> updateState[Update State]
+        updateState --> Board
+        
+        
+    end
+
+    main -.-> GameLoop
