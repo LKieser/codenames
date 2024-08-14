@@ -1,10 +1,9 @@
 ---
-title: "Board states based on the player"
+title: "Board states"
 ---
 
 stateDiagram-v2
-    [*] --> Player?: Render()
-    Player? --> AnswerBoard: CodeGiver()
-    Player? --> PlainBoard: Guesser()
-    AnswerBoard --> UpdateBoard: UpdateState()
-    PlainBoard --> UpdateBoard: UpdateState()
+    [*] --> CodeGiverView: Render()
+    CodeGiverView --> GuesserView: Code Word Created
+    GuesserView --> CodeGiverView: Incorrect Guess
+    GuesserView --> CodeGiverView: No Guesses Left
