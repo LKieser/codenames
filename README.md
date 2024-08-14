@@ -38,5 +38,5 @@ Codenames is a board/card game where two teams, red and blue, compete against ea
 ### Class structure
 <img src="doc/classDiagram.png" width="25%">
 
-### Board state
+### Board state machine
 <img src="doc/boardState.png" width="35%">
