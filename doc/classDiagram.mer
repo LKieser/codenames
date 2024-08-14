@@ -1,5 +1,5 @@
 ---
-title: "Class relationships and selected members"
+title: "Class relationships"
 ---
 classDiagram
 
@@ -38,4 +38,4 @@ class Board {
 }
 
 Board *-- Card: Aggregation
-Game o-- Board: Aggregation
+Game *-- Board: Aggregation
