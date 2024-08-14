@@ -1,5 +1,5 @@
 # Codenames
-Codenames is a board/card game where two teams, red and blue, compete against each to be the first to guess all of their team's cards. This project uses a TUI to implement the setup of the board and the game play
+Codenames is a board/card game where two teams, red and blue, compete against each to be the first to guess all of their team's cards. This project uses a TUI to implement the setup of the board and the game play.
 
 <img src="doc/codenames.gif" width="75%"/>
 
@@ -10,19 +10,20 @@ Codenames is a board/card game where two teams, red and blue, compete against ea
 - Implementing pytest
 - Understanding the process of refactoring code to make it more readable and easy to debug
 
-## Building, Running, and Testing
-1. Clone this repo
-2. If Python is not installed on your device, install it now
-3. Open a new terminal and run `python3 main.py` (Substitute python3 with your version of Python)
-4. If using vscode, go to the `testing` section of the side bar and run the `codenames` test to run all the tests.
+## Running the Game
+- `python3 main.py`
+
+## Testing the Game
+- `cd tests`
+- `pytest -v`
 
 ## Playing the Game
-- Go get your friends. You need at least 4 people to play this game and the more the merrier
-- Once you have split into two teams, <span style="color:red;">Red</span> and <span style="color:blue;">Blue</span>, choose one person from each team to be the codegiver and the rest are guessers
-- Press `Enter` to begin, send the guessers away, and press `Enter` again
+- Go get your friends. You need at least 4 people to play this game and the more the merrier.
+- Once you have split into two teams, <span style="color:red;">Red</span> and <span style="color:blue;">Blue</span>, choose one person from each team to be the codegiver and the rest are guessers.
+- Press `Enter` to begin, send the guessers away, and press `Enter` again.
 - The board that now appears is the codegivers board. The colors for your team are displayed on the board and you must type one word that connects a few of your teams words. You will specify after you type the word how many words you are connecting. Be careful not to direct your teammates to the wrong word on accident!
-    - Yellow is a neutral color. Your turn ends if you select this word
-    - Black is the death card. If the card is selected the game is instantly over and you lose
+    - Yellow is a neutral color. Your turn ends if you select this word.
+    - Black is the death card. If the card is selected the game is instantly over and you lose.
 - Once you have typed a word and the corresponding numbers, continue to the next page and call your teammates back.
 - They will now guess which word they think you are referring to. 
     - If they are correct, they will continue guessing until they've guessed to the number of words that you chose. 
