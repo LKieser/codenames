@@ -11,11 +11,17 @@ Codenames is a board/card game where two teams, red and blue, compete against ea
 - Understanding the process of refactoring code to make it more readable and easy to debug
 
 ## Running the Game
-- `python3 main.py`
+ ```sh
+python3 main.py
+ ```
 
 ## Testing the Game
-- `cd tests`
-- `pytest -v`
+```sh
+cd tests
+```
+```sh
+pytest -v
+```
 
 ## Playing the Game
 - Go get your friends. You need at least 4 people to play this game and the more the merrier.

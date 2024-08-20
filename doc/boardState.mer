@@ -1,7 +1,3 @@
----
-title: "Board states"
----
-
 stateDiagram-v2
     [*] --> CodeGiverView
     CodeGiverView --> GuesserView: Code Word Created

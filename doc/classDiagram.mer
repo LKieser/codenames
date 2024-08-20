@@ -1,6 +1,3 @@
----
-title: "Class relationships"
----
 classDiagram
 
 class Game {
