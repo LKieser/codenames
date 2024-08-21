@@ -18,8 +18,6 @@ python3 main.py
 ## Testing the Game
 ```sh
 cd tests
-```
-```sh
 pytest -v
 ```
 
