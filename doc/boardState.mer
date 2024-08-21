@@ -1,0 +1,5 @@
+stateDiagram-v2
+    [*] --> CodeGiverView
+    CodeGiverView --> GuesserView: Code Word Created
+    GuesserView --> CodeGiverView: Incorrect Guess
+    GuesserView --> CodeGiverView: No Guesses Left
